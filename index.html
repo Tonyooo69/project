@@ -3,12 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Letters for u my love</title>
+    <title>Send Me Random Messages!</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 50px; background-color: #f4f4f9; }
+        .container { max-width: 400px; margin: 0 auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        textarea { width: 100%; height: 100px; margin-bottom: 15px; padding: 10px; border-radius: 5px; border: 1px solid #ccc; resize: none; box-sizing: border-box; }
+        button { background-color: #ff4757; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-size: 16px; width: 100%; }
+        button:hover { background-color: #e84118; }
+    </style>
 </head>
 <body>
-    <h2>My Love</h2>
-    <p>Bakit ang ganda mo!</p>
-    <p>Always be with me, my love!</p>
-    <button>Send Message</button>
+
+    <div class="container">
+        <h2>Send Me a Random Message! 🤫</h2>
+        <p>Leave a secret, a joke, or anything you want to say.</p>
+        
+        <!-- PALITAN ANG ACTION NG IYONG FORMSPREE URL -->
+        <form id="messageForm" action="https://formspree.io/f/xzdwyklw" method="POST">
+            <textarea name="message" placeholder="Type your message here..." required></textarea>
+            <button type="submit">Send Message ✨</button>
+        </form>
+    </div>
+
+    <script>
+        // Opsyonal: Para hindi mag-reload ang page at magpakita ng magandang alert pagkatapos mag-submit
+        const form = document.getElementById('messageForm');
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const data = new FormData(form);
+            
+            const response = await fetch(form.action, {
+                method: form.method,
+                body: data,
+                headers: { 'Accept': 'application/json' }
+            });
+
+            if (response.ok) {
+                alert('Sent anonymoulsy! Thank you! ❤️');
+                form.reset();
+            } else {
+                alert('Oops! Nagka-problema sa pagpapadala.');
+            }
+        });
+    </script>
 </body>
 </html>
